@@ -27,10 +27,8 @@ class _OrderEntryState extends State<OrderEntry>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: duration);
-    _controller.addListener(() {
-      setState(() {});
-    });
+    _controller = AnimationController(vsync: this, duration: duration)
+      ..addListener(() => setState(() {}));
   }
 
   @override

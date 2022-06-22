@@ -1,6 +1,6 @@
-# flutter_animated_orders_list
+# Animated Order List
 
-A new Flutter project.
+A simple staggered animation project.
 
 ## Getting Started
 

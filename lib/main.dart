@@ -74,6 +74,36 @@ class MyApp extends StatelessWidget {
         zipCode: 11237,
       ),
     ),
+    //
+    Order(
+      id: '#${Random().nextInt(9999999)}',
+      sender: User(
+        firstname: 'John',
+        lastname: 'Doe',
+        evaluation: 3,
+      ),
+      product: Product(
+        price: 59.99,
+        image:
+        'https://unsplash.com/photos/yjAFnkLtKY0/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MzB8fHByb2R1Y3R8ZW58MHx8fHwxNjU1NjcyNDkw&force=true&w=640',
+        weight: 72,
+      ),
+      shippingCost: 30.0,
+      sendingFrom: Address(
+        street: 'Smoky Hollow Rd',
+        number: 761,
+        city: 'Brooklyn',
+        state: 'NY',
+        zipCode: 11210,
+      ),
+      sendingTo: Address(
+        street: 'Bohemia Ave',
+        number: 46,
+        city: 'Brooklyn',
+        state: 'NY',
+        zipCode: 11237,
+      ),
+    ),
   ];
 
   @override
