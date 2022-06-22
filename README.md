@@ -2,4 +2,4 @@
 
 A simple staggered animation project.
 
-![Animation](animation.gif)
+![Animation](https://imgur.com/a/QYzTEWJ)
