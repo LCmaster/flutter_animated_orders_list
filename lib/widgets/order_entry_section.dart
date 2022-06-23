@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_orders_list/models/order.dart';
 
 class OrderEntrySection extends StatelessWidget {
   final String title;
@@ -32,12 +31,12 @@ class OrderEntrySection extends StatelessWidget {
   }
 }
 
-class ListItemDetailsSectionRow extends StatelessWidget {
+class OrderEntrySectionRow extends StatelessWidget {
   final double height;
   final EdgeInsets padding;
   final List<Widget> children;
 
-  const ListItemDetailsSectionRow({
+  const OrderEntrySectionRow({
     Key? key,
     required this.height,
     required this.children,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_orders_list/models/order.dart';
-import 'package:flutter_animated_orders_list/widgets/folding_widget.dart';
-import 'package:flutter_animated_orders_list/widgets/order_entry_footer.dart';
+import 'package:flutter_animated_orders_list/widgets/animated_folding_widget.dart';
 import 'package:flutter_animated_orders_list/widgets/order_entry_header.dart';
 import 'package:flutter_animated_orders_list/widgets/order_entry_section.dart';
 import 'package:flutter_animated_orders_list/widgets/order_entry_summary.dart';
@@ -27,8 +26,10 @@ class _OrderEntryState extends State<OrderEntry>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: duration)
-      ..addListener(() => setState(() {}));
+    _controller = AnimationController(vsync: this, duration: duration);
+    _controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -46,7 +47,7 @@ class _OrderEntryState extends State<OrderEntry>
   }
 
   Widget _senderSection() {
-    return ListItemDetailsSectionRow(
+    return OrderEntrySectionRow(
       height: 75,
       padding:
           const EdgeInsets.only(top: 5.0, bottom: 2.5, left: 10.0, right: 10.0),
@@ -95,7 +96,7 @@ class _OrderEntryState extends State<OrderEntry>
   }
 
   Widget _addressSection() {
-    return ListItemDetailsSectionRow(
+    return OrderEntrySectionRow(
       height: 75,
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.5),
       children: [
@@ -126,7 +127,7 @@ class _OrderEntryState extends State<OrderEntry>
   }
 
   Widget _deliverySection() {
-    return const ListItemDetailsSectionRow(
+    return const OrderEntrySectionRow(
       height: 80,
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.5),
       children: [
@@ -161,19 +162,47 @@ class _OrderEntryState extends State<OrderEntry>
     );
   }
 
+  Widget _messageSection() {
+    return Container(
+      height: 75,
+      width: double.infinity,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.only(
+            top: 2.5, bottom: 5.0, left: 10.0, right: 10.0),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            primary: Colors.amber,
+          ),
+          child: Text(
+            'Contact Sender'.toUpperCase(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+              color: Colors.black54,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _toggleAnimation,
-      child: FoldingWidget(
-        _controller,
-        const Interval(
-          0.0,
-          1 / 3,
-          curve: Curves.easeInOut,
+      child: AnimatedFoldingWidget(
+        animation: Tween(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: _controller,
+            curve: const Interval(
+              0.0,
+              1 / 3,
+              curve: Curves.easeInOut,
+            ),
+          ),
         ),
-        width: double.infinity,
-        height: 180,
         behind: OrderEntryHeader(
           height: 180,
           order: widget.order,
@@ -184,35 +213,39 @@ class _OrderEntryState extends State<OrderEntry>
         next: Column(
           children: [
             _senderSection(),
-            FoldingWidget(
-              _controller,
-              const Interval(
-                1 / 3,
-                1 / 3 * 2,
-                curve: Curves.easeInOut,
+            AnimatedFoldingWidget(
+              animation: Tween(begin: 0.0, end: 1.0).animate(
+                CurvedAnimation(
+                  parent: _controller,
+                  curve: const Interval(
+                    1 / 3,
+                    1 / 3 * 2,
+                    curve: Curves.easeInOut,
+                  ),
+                ),
               ),
-              width: double.infinity,
-              height: 180,
               behind: _addressSection(),
               front: Container(
                 height: 75,
                 color: Colors.white,
               ),
-              next: FoldingWidget(
-                _controller,
-                const Interval(
-                  1 / 3 * 2,
-                  1.0,
-                  curve: Curves.easeInOut,
+              next: AnimatedFoldingWidget(
+                animation: Tween(begin: 0.0, end: 1.0).animate(
+                  CurvedAnimation(
+                    parent: _controller,
+                    curve: const Interval(
+                      1 / 3 * 2,
+                      1.0,
+                      curve: Curves.easeInOut,
+                    ),
+                  ),
                 ),
-                width: double.infinity,
-                height: 75,
                 behind: _deliverySection(),
                 front: Container(
                   height: 75,
                   color: Colors.white,
                 ),
-                next: const OrderEntryFooter(),
+                next: _messageSection(),
               ),
             ),
           ],

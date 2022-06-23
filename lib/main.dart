@@ -6,7 +6,6 @@ import 'package:flutter_animated_orders_list/models/order.dart';
 import 'package:flutter_animated_orders_list/models/product.dart';
 import 'package:flutter_animated_orders_list/models/user.dart';
 import 'package:flutter_animated_orders_list/widgets/order_list.dart';
-
 void main() {
   runApp(MyApp());
 }
